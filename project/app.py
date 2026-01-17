@@ -14,7 +14,7 @@ def index():
 
         if text:
             category = classify_email(text)
-            response = generate_response(category)
+            response = generate_response(text, category)
             result = category
 
     return render_template(

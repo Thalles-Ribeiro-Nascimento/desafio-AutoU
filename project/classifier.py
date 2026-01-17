@@ -1,38 +1,68 @@
-from transformers import pipeline
+from dotenv import load_dotenv
+from openai import OpenAI
+import os
 
-classifier = pipeline(
-    "zero-shot-classification",
-    model="facebook/bart-large-mnli"
-)
+load_dotenv()
 
-# generator_text = pipeline(
-#     "text-generation",
-#     model="meta-llama/Meta-Llama-3-8B-Instruct",
-#     trust_remote_code=True,
-#     device_map="auto"
-# )
+openAi = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+
 def classify_email(text):
-    labels = ["Produtivo", "Improdutivo"]
-    result = classifier(text, labels)
-    return result["labels"][0]
+    category = openAi.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role" : "system",
+                "content" : (
+                    """
+                        Você é um classificador os emails.
+                
+                        Categorias:
+                        Produtivo: Emails que requerem uma ação ou resposta específica
+                         (ex.: solicitações de suporte técnico, atualização sobre casos em aberto, dúvidas sobre o sistema)
+                
+                         Improdutivo: Emails que não necessitam de uma ação imediata
+                          (ex.: mensagens de felicitações, agradecimentos).
+                          
+                          Responda somente com 'Produtivo' ou 'Improdutivo'.
+                          Emails 'promocionais' e 'diversos' categorizar como improdutivo.
+                    """
+                )
+            },
+            {
+                "role" : "user",
+                "content" : text
+            }
+        ],
+        temperature=0
+    )
+
+    return category.choices[0].message.content.strip()
 
 
-def generate_response(category):
-    prompt = f"""
-    Você é um secretário em uma empresa Financeira
-    
-    Categorias:
-    Produtivo: Emails que requerem uma ação ou resposta específica
-     (ex.: solicitações de suporte técnico, atualização sobre casos em aberto, dúvidas sobre o sistema)
-     
-     Improdutivo: Emails que não necessitam de uma ação imediata
-      (ex.: mensagens de felicitações, agradecimentos).
-    
-    Faça uma resposta automática para o e-mail que está categorizado em {category}
-    """
-    text = generator_text(prompt, temperature=0.5, max_new_tokens=100, top_p=0.9)
+def generate_response(email, category):
+    response = openAi.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role" : "system",
+                "content" : (
+                    f"""
+                    Você é um assistente que responde emails de acordo com a categoria desse email.
+                    Após atenciosamente usar os seguintes dados:
+                    [Seu Nome] = Thalles Nascimento
+                    [Seu Cargo] = Tecnologia da Informação
+                    Gere uma resposta clara, objetiva e simpática para o email recebido, considerando
+                    a categoria '{category}'. Para categoria 'Produtivo' sua resposta precisa ser apenas automática e que 
+                    o email será respondido posteriormente pelo responsável.
+                    """
+                )
+            },
+            {
+                "role" : "user",
+                "content" : email
+            }
+        ],
+        temperature=0.4
+    )
 
-    if category == "Produtivo":
-        return text[0]['generated_text']
-    else:
-        return text[0]['generated_text']
+    return response.choices[0].message.content.strip()
