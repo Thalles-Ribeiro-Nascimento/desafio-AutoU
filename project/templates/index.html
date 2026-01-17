@@ -51,7 +51,26 @@
         <p>{{ response }}</p>
     </div>
     {% endif %}
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label>Upload do email (.pdf ou .txt):</label><br><br>
+
+        <input type="file" name="email_file" accept=".pdf,.txt,application/pdf,text/plain" required>
+        <br><br>
+
+        <button type="submit">Processar Email</button>
+    </form>
+
+    {% if category %}
+    <hr>
+    <p><strong>Categoria:</strong> {{ category }}</p>
+    <p><strong>Resposta sugerida:</strong></p>
+    <p>{{ reply }}</p>
+    {% endif %}
+
 </div>
+
+
 
 </body>
 </html>

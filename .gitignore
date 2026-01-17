@@ -2,3 +2,4 @@
 venv/
 .venv/
 project/.env
+project/__pycache__
