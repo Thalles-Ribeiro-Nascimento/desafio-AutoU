@@ -10,6 +10,10 @@ def index():
 @app.post("/")
 def text_email():
     text = request.form.get("email_text")
+
+    if text == "":
+        return "Não foi possível classificar o email."
+
     category = classify_email(text)
     response = generate_response(text, category)
     result = category
@@ -26,7 +30,7 @@ def file_email():
     file = request.files.get("email_file")
 
     if not file or not file.filename.endswith((".pdf",".txt")):
-        return "Por favor, envie apenas arquivos PDF ou TXT.", 400
+        return "Por favor, envie apenas arquivos PDF ou TXT."
 
     if file.filename.endswith(".txt"):
         email_txt = file.read().decode("utf-8")
@@ -42,7 +46,7 @@ def file_email():
     email_text = extrair_pdf(file)
 
     if not email_text:
-        return "Não foi possível extrair texto do PDF.", 400
+        return "Não foi possível extrair texto do PDF."
 
     category = classify_email(email_text)
     response = generate_response(email_text, category)

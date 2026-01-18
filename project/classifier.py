@@ -24,10 +24,10 @@ def classify_email(text):
                          Improdutivo: Emails que não necessitam de uma ação imediata
                           (ex.: mensagens de felicitações, agradecimentos).
                          
-                         Diversos: Emails promocionais (ex.: Ofertas, promoções)
+                         Diversos: Emails promocionais (ex.: Ofertas, promoções, vagas, currículo)
                           
-                          Responda somente com 'Produtivo' ou 'Improdutivo'.
-                          Emails 'promocionais' e 'diversos' categorizar como 'Diversos'.
+                          Responda somente com 'Produtivo', 'Improdutivo' ou 'Diversos'.
+                          
                     """
                 )
             },
@@ -53,10 +53,7 @@ def generate_response(email, category):
                 "content" : (
                     f"""
                     Você é um assistente que responde emails de acordo com a categoria.
-                    Após atenciosamente usar os seguintes dados:
-                    [Seu Nome] = {name}
-                    [Seu Cargo] = {job}
-                    
+                    Não utilizar o 'Atenciosamente'. Finalizar o email dizendo que foi uma resposta automática.                    
                     Gere uma resposta clara, objetiva e simpática para o email recebido, considerando
                     a categoria '{category}'. Para categoria 'Produtivo' sua resposta precisa ser apenas automática e que 
                     o email será respondido posteriormente pelo responsável.
