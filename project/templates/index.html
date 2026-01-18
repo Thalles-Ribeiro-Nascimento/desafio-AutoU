@@ -58,109 +58,109 @@
 
 <body class="bg-gradient">
 
-<nav class="navbar shadow-sm bg-gradient mb-4">
-  <div class="container d-flex align-items-center">
-    <a href="/" class="d-flex align-items-center text-decoration-none">
-      <img src="{{ url_for('static', filename='logo.png') }}" width="70" height="70" class="me-2">
-    </a>
+  <nav class="navbar shadow-sm bg-gradient mb-4">
+    <div class="container d-flex align-items-center">
+      <a href="/" class="d-flex align-items-center text-decoration-none">
+        <img src="{{ url_for('static', filename='logo.png') }}" width="70" height="70" class="me-2">
+      </a>
 
-    <ul class="nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link text-dark" target="_blank"
-           href="https://www.linkedin.com/in/thallesnascimento">LinkedIn</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" target="_blank"
-           href="https://github.com/Thalles-Ribeiro-Nascimento">GitHub</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+      <ul class="nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank"
+             href="https://www.linkedin.com/in/thallesnascimento">LinkedIn</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank"
+             href="https://github.com/Thalles-Ribeiro-Nascimento">GitHub</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<!-- Conteúdo -->
-<div class="container mb-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
+  <!-- Conteúdo -->
+  <div class="container mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
 
-      <div class="card shadow-sm mb-4">
-        <div class="card-body p-4">
-          <h2 class="fw-semibold mb-4">
-            Desafio - AutoU
-          </h2>
+        <div class="card shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h2 class="fw-semibold mb-4">
+              Desafio - AutoU
+            </h2>
 
-          <p>
-          <h3>Análise do seu e-mail com Inteligência Artificial</h3>
-          </p>
-
-          <form action="/" method="POST">
-            <div class="mb-2">
-              <textarea
-                name="email_text"
-                class="form-control"
-                rows="2"
-                placeholder="Cole o conteúdo do e-mail aqui"
-              >{{ text }}</textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">
-              Analisar Texto
-            </button>
-          </form>
             <p>
+            <h3>Análise do seu e-mail com Inteligência Artificial</h3>
+            </p>
 
-            <div class="card shadow-sm">
-              <div class="card-body p-4">
-                <h6 class="fw-semibold mb-1">
-                  Selecione um arquivo
-                </h6>
-
-                <form action="/upload" method="POST" enctype="multipart/form-data">
-                  <div class="mb-3">
-                    <input
-                      type="file"
-                      class="form-control"
-                      name="email_file"
-                      accept=".pdf,.txt,application/pdf,text/plain"
-                      required
-                    >
-                  </div>
-
-                  <button type="submit" class="btn btn-success w-100">
-                    Processar Arquivo
-                  </button>
-                </form>
-
-                  {% if result %}
-                  <div class="alert alert-primary mt-4">
-                    <p class="mt-2"><strong>Categoria:</strong> {{ result }}</p>
-                    <p class="mb-1"><strong>Resposta sugerida:</strong></p>
-                    <p class="mb-0">{{ response }}</p>
-                  </div>
-                  {% endif %}
-
-                  {% if error %}
-                  <div class="alert alert-danger mt-4">
-                      <p class="mb-1"><strong>Erro:</strong></p>
-                      <p class="mb-0">{{ error }}</p>
-                  </div>
-                  {% endif %}
+            <form action="/" method="POST">
+              <div class="mb-2">
+                <textarea
+                  name="email_text"
+                  class="form-control"
+                  rows="2"
+                  placeholder="Cole o conteúdo do e-mail aqui"
+                >{{ text }}</textarea>
               </div>
-            </div>
+
+              <button type="submit" class="btn btn-primary w-100">
+                Analisar Texto
+              </button>
+            </form>
+              <p>
+
+              <div class="card shadow-sm">
+                <div class="card-body p-4">
+                  <h6 class="fw-semibold mb-1">
+                    Selecione um arquivo
+                  </h6>
+
+                  <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <input
+                        type="file"
+                        class="form-control"
+                        name="email_file"
+                        accept=".pdf,.txt,application/pdf,text/plain"
+                        required
+                      >
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">
+                      Processar Arquivo
+                    </button>
+                  </form>
+
+                    {% if result %}
+                    <div class="alert alert-primary mt-4">
+                      <p class="mt-2"><strong>Categoria:</strong> {{ result }}</p>
+                      <p class="mb-1"><strong>Resposta sugerida:</strong></p>
+                      <p class="mb-0">{{ response }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if error %}
+                    <div class="alert alert-danger mt-4">
+                        <p class="mb-1"><strong>Erro:</strong></p>
+                        <p class="mb-0">{{ error }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Footer -->
-<footer class="text-center text-muted py-4">
-  <small>
-    Author · Thalles Ribeiro Nascimento
-  </small>
-</footer>
+  <!-- Footer -->
+  <footer class="text-center text-muted py-4">
+    <small>
+      Author · Thalles Ribeiro Nascimento
+    </small>
+  </footer>
 
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
 </body>
 </html>

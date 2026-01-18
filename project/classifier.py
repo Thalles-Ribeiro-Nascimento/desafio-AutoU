@@ -29,9 +29,9 @@ def classify_email(text):
                           (ex.: mensagens de felicitações, agradecimentos).
                           
                           Diversos: Emails relacionados a vagas, emprego ou qualquer outro assunto que não esteja
-                          relacionado com as categorias 'Produtivo' e 'Improdutivo'.
+                          relacionado com as categorias 'Produtivo' e 'Improdutivo' e textos vazios.
                                                     
-                          Responda somente com 'Produtivo', 'Improdutivo' ou 'Diversos'.
+                          Responda somente com as categorias acima.
                           
                     """
                 )

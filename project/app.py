@@ -32,8 +32,8 @@ def file_email():
 
     if file.filename.endswith(".txt"):
         email_txt = file.read().decode("utf-8")
-
         category = classify_email(email_txt)
+
         if category is None:
             return error(400, "Não foi possível categorizar o email.")
 
@@ -44,19 +44,19 @@ def file_email():
             response=response
         )
 
-    else:
-        email_text = extrair_pdf(file)
-        category = classify_email(email_text)
 
-        if category is None:
-            return error(400, "Não foi possível categorizar o email.")
-        response = generate_response(email_text, category)
+    email_text = extrair_pdf(file)
+    category = classify_email(email_text)
 
-        return render_template(
-            "index.html",
-            result=category,
-            response=response
-        )
+    if category is None:
+        return error(400, "Não foi possível categorizar o email.")
+    response = generate_response(email_text, category)
+
+    return render_template(
+        "index.html",
+        result=category,
+        response=response
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
