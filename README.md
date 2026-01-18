@@ -40,12 +40,3 @@ OpenAI - GPT-4o-MINI
 
 #### Envio de Email
 N8N - Automatizando o envio de e-mail
-
-
-## Imagens do Projeto
-<img src="https://drive.google.com/file/d/1VKhLeUpmB7ACaaaZ4e_LhEuur2cwOQG3/view?usp=sharing"/>
-
-<img src="https://drive.google.com/file/d/1YneNjiAtDz3IAqgCsr-fvgq0gyFYUxlk/view?usp=sharing"/>
-
-<img src="https://drive.google.com/file/d/17qOCjzqqzkVGZM0rZP6qTTOO0hZreANO/view?usp=sharing"/>
-
