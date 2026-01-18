@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from flask import render_template
 from openai import OpenAI
 from pypdf import PdfReader
 import os
@@ -19,13 +20,17 @@ def classify_email(text):
                 
                         Categorias:
                         Produtivo: Emails que requerem uma ação ou resposta específica
-                         (ex.: solicitações de suporte técnico, atualização sobre casos em aberto, dúvidas sobre o sistema)
+                         (
+                         ex.: solicitações de suporte técnico, atualização sobre casos em aberto, dúvidas sobre o
+                          sistema
+                         )
                 
                          Improdutivo: Emails que não necessitam de uma ação imediata
                           (ex.: mensagens de felicitações, agradecimentos).
-                         
-                         Diversos: Emails promocionais (ex.: Ofertas, promoções, vagas, currículo)
                           
+                          Diversos: Emails relacionados a vagas, emprego ou qualquer outro assunto que não esteja
+                          relacionado com as categorias 'Produtivo' e 'Improdutivo'.
+                                                    
                           Responda somente com 'Produtivo', 'Improdutivo' ou 'Diversos'.
                           
                     """
@@ -49,9 +54,6 @@ def classify_email(text):
 def generate_response(email, category):
     if category is None:
         return None
-
-    name = os.getenv('NAME_RESPONSE')
-    job = os.getenv('POSITION_RESPONSE')
 
     response = openAi.chat.completions.create(
         model="gpt-4o-mini",
@@ -86,3 +88,6 @@ def extrair_pdf(file):
         text += page.extract_text() or ""
 
     return text.strip()
+
+def error(status_code, message):
+    return render_template("index.html", error=message), status_code

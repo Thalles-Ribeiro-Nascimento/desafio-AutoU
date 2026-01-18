@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Desafio - AutoU</title>
 
-  <link rel="shortcut icon" href="./assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,7 +61,7 @@
 <nav class="navbar shadow-sm bg-gradient mb-4">
   <div class="container d-flex align-items-center">
     <a href="/" class="d-flex align-items-center text-decoration-none">
-      <img src="./assets/icon.png" width="70" height="70" class="me-2">
+      <img src="{{ url_for('static', filename='logo.png') }}" width="70" height="70" class="me-2">
     </a>
 
     <ul class="nav ms-auto">
@@ -84,34 +84,35 @@
 
       <div class="card shadow-sm mb-4">
         <div class="card-body p-4">
-          <h3 class="fw-semibold mb-3">
+          <h2 class="fw-semibold mb-4">
             Desafio - AutoU
-          </h3>
-          <br>
+          </h2>
 
-          <h6>Cole o e-mail abaixo</h6>
+          <p>
+          <h3>Análise do seu e-mail com Inteligência Artificial</h3>
+          </p>
 
           <form action="/" method="POST">
-            <div class="mb-3">
+            <div class="mb-2">
               <textarea
                 name="email_text"
                 class="form-control"
                 rows="2"
-                placeholder="Conteúdo do E-mail"
+                placeholder="Cole o conteúdo do e-mail aqui"
               >{{ text }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">
-              Analisar Email
+              Analisar Texto
             </button>
           </form>
             <p>
 
             <div class="card shadow-sm">
               <div class="card-body p-4">
-                <h5 class="fw-semibold mb-3">
-                  Upload de Arquivo (PDF ou TXT)
-                </h5>
+                <h6 class="fw-semibold mb-1">
+                  Selecione um arquivo
+                </h6>
 
                 <form action="/upload" method="POST" enctype="multipart/form-data">
                   <div class="mb-3">
