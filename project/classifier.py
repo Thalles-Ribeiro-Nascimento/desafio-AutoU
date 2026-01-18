@@ -9,6 +9,16 @@ load_dotenv()
 openAi = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 def classify_email(text):
+    """
+    Método para classificar o texto enviado pelas apis expostas na rota.
+    Utiliza o gpt-4o-mini para realizar a classificação. O GPT classifica em Produtivo emails relacionados
+    ao trabalho/setor e em Improdutivos e-mails diversos e que fogem do ambiente de trabalho.
+    Caso a classificação seja diferente das citadas acima, o método retorna None, como uma forma de controle de erros.
+    Recebe como argumento o e-mail/texto.
+    :param text: str
+    :return: Categoria
+    """
+
     category = openAi.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -52,6 +62,14 @@ def classify_email(text):
     return response_openAi
 
 def generate_response(email, category):
+    """
+    Método que gera as respostas automáticas. Utiliza o mesmo GPT do método de Classificação. Recebe como argumentos
+    o e-mail/texto e a categoria que ele foi classificado, caso exista.
+    :param email: str
+    :param category: str
+    :return: Resposta Automatica
+    """
+
     if category is None:
         return None
 
@@ -63,10 +81,11 @@ def generate_response(email, category):
                 "content" : (
                     f"""
                     Você é um assistente que responde emails de acordo com a categoria.
-                    Não utilizar o 'Atenciosamente'. Finalizar o email dizendo que foi uma resposta automática.                    
+                    Não utilizar o 'Atenciosamente'.
+                    Finalizar o email dizendo que foi uma resposta automática.                    
                     Gere uma resposta clara, objetiva e simpática para o email recebido, considerando
                     a categoria '{category}'. Para categoria 'Produtivo' sua resposta precisa ser apenas automática e que 
-                    o email será respondido posteriormente pelo responsável.
+                    o email será respondido posteriormente pelo responsável.                    
                     """
                 )
             },
@@ -81,6 +100,14 @@ def generate_response(email, category):
     return response.choices[0].message.content.strip()
 
 def extrair_pdf(file):
+    """
+    Método para extrair os arquivos em .pdf recebidos na API. Recebe como argumento o arquivo e utiliza a biblioteca
+    pypdf para leitura e extração. Retorna o texto do .pdf formatado.
+
+    :param file: File
+    :return: Texto Formatado
+    """
+
     pdf = PdfReader(file)
     text = ""
 
@@ -90,4 +117,12 @@ def extrair_pdf(file):
     return text.strip()
 
 def error(status_code, message):
+    """
+    Método para tratar os erros que ocorrem na API. Recebem os argumentos Status Code e Message que é o status
+    da requisição e a mensagem de erro respectivamente.
+    :param status_code: int
+    :param message: str
+    :return: Template HTML
+    """
+
     return render_template("index.html", error=message), status_code
