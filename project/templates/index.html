@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Desafio - AutoU</title>
 
-  <link rel="shortcut icon" href="https://drive.google.com/file/d/1JDwvPIgh0fOOiiOQIz87Se1Dd1IsXk2C/view?usp=sharing" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/icons/favicon.ico" type="image/x-icon">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,51 +19,49 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #F6F7FB;
-      color: #1F2937;
+      background-color: #FFF5EE;
+      color: #DCDCDC;
     }
 
     .navbar {
-      background-color: #ffffff;
+      background-color: #F8F8FF;
     }
 
     .btn-primary {
-      background-color: #5B2EFF;
+      background-color: #FFA500;
       border: none;
+      color: #0f172a;
     }
 
     .btn-primary:hover {
-      background-color: #4a25d4;
+      background-color: #FF8C00;
     }
 
     .btn-success {
-      background-color: #00E5A8;
+      background-color: #E0FFFF;
       border: none;
       color: #0f172a;
       font-weight: 500;
     }
 
     .btn-success:hover {
-      background-color: #00c894;
+      background-color: #B0E0E6;
     }
 
     .card {
-      border: none;
+      border: yellow;
       border-radius: 12px;
     }
 
-    .badge-autou {
-      background-color: #5B2EFF;
-    }
   </style>
 </head>
 
-<body>
+<body class="bg-gradient">
 
-<nav class="navbar shadow-sm mb-4">
+<nav class="navbar shadow-sm bg-gradient mb-4">
   <div class="container d-flex align-items-center">
     <a href="/" class="d-flex align-items-center text-decoration-none">
-      <img src="https://drive.google.com/file/d/1gKCMFE-pYQnYnJte7e0RxGVxfCoZZVYz/view?usp=sharing" width="70" height="70" class="me-2">
+      <img src="./assets/icon.png" width="70" height="70" class="me-2">
     </a>
 
     <ul class="nav ms-auto">
@@ -84,20 +82,22 @@
   <div class="row justify-content-center">
     <div class="col-lg-8">
 
-      <!-- Card texto -->
       <div class="card shadow-sm mb-4">
         <div class="card-body p-4">
-          <h4 class="fw-semibold mb-3">
+          <h3 class="fw-semibold mb-3">
             Desafio - AutoU
-          </h4>
+          </h3>
+          <br>
 
-          <form method="POST">
+          <h6>Cole o e-mail abaixo</h6>
+
+          <form action="/" method="POST">
             <div class="mb-3">
               <textarea
                 name="email_text"
                 class="form-control"
-                rows="5"
-                placeholder="Cole aqui o conteúdo do email..."
+                rows="2"
+                placeholder="Conteúdo do E-mail"
               >{{ text }}</textarea>
             </div>
 
@@ -105,51 +105,48 @@
               Analisar Email
             </button>
           </form>
+            <p>
 
-          {% if result %}
-          <div class="alert alert-primary mt-4">
-            <span class="badge badge-autou mb-2">Resultado</span>
-            <p class="mt-2"><strong>Categoria:</strong> {{ result }}</p>
-            <p class="mb-1"><strong>Resposta sugerida:</strong></p>
-            <p class="mb-0">{{ response }}</p>
-          </div>
-          {% endif %}
-        </div>
-      </div>
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <h5 class="fw-semibold mb-3">
+                  Upload de Arquivo (PDF ou TXT)
+                </h5>
 
-      <!-- Card upload -->
-      <div class="card shadow-sm">
-        <div class="card-body p-4">
-          <h5 class="fw-semibold mb-3">
-            Upload de Arquivo (PDF ou TXT)
-          </h5>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="email_file"
+                      accept=".pdf,.txt,application/pdf,text/plain"
+                      required
+                    >
+                  </div>
 
-          <form action="/upload" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-              <input
-                type="file"
-                class="form-control"
-                name="email_file"
-                accept=".pdf,.txt,application/pdf,text/plain"
-                required
-              >
+                  <button type="submit" class="btn btn-success w-100">
+                    Processar Arquivo
+                  </button>
+                </form>
+
+                  {% if result %}
+                  <div class="alert alert-primary mt-4">
+                    <p class="mt-2"><strong>Categoria:</strong> {{ result }}</p>
+                    <p class="mb-1"><strong>Resposta sugerida:</strong></p>
+                    <p class="mb-0">{{ response }}</p>
+                  </div>
+                  {% endif %}
+
+                  {% if error %}
+                  <div class="alert alert-danger mt-4">
+                      <p class="mb-1"><strong>Erro:</strong></p>
+                      <p class="mb-0">{{ error }}</p>
+                  </div>
+                  {% endif %}
+              </div>
             </div>
-
-            <button type="submit" class="btn btn-success w-100">
-              Processar Arquivo
-            </button>
-          </form>
-
-          {% if category %}
-          <div class="alert alert-success mt-4">
-            <p><strong>Categoria:</strong> {{ category }}</p>
-            <p class="mb-1"><strong>Resposta sugerida:</strong></p>
-            <p class="mb-0">{{ reply }}</p>
-          </div>
-          {% endif %}
         </div>
       </div>
-
     </div>
   </div>
 </div>

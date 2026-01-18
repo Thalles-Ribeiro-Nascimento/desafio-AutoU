@@ -12,15 +12,14 @@ def text_email():
     text = request.form.get("email_text")
 
     if text == "":
-        return "Não foi possível classificar o email."
+        return render_template("index.html", error="Não há email para classificar!")
 
     category = classify_email(text)
     response = generate_response(text, category)
-    result = category
 
     return render_template(
         "index.html",
-        result=result,
+        result=category,
         response=response,
         text=text
     )
@@ -39,8 +38,8 @@ def file_email():
         response = generate_response(email_txt, category)
         return render_template(
             "index.html",
-            category=category,
-            reply=response
+            result=category,
+            response=response
         )
 
     email_text = extrair_pdf(file)
@@ -53,8 +52,8 @@ def file_email():
 
     return render_template(
         "index.html",
-        category=category,
-        reply=response
+        result=category,
+        response=response
     )
 
 if __name__ == "__main__":

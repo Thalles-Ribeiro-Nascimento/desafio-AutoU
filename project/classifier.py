@@ -39,9 +39,17 @@ def classify_email(text):
         temperature=0
     )
 
-    return category.choices[0].message.content.strip()
+    response_openAi = category.choices[0].message.content.strip()
+
+    if response_openAi != "Produtivo" and response_openAi != "Improdutivo":
+        return None
+
+    return response_openAi
 
 def generate_response(email, category):
+    if category is None:
+        return None
+
     name = os.getenv('NAME_RESPONSE')
     job = os.getenv('POSITION_RESPONSE')
 
