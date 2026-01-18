@@ -12,9 +12,13 @@ def text_email():
     text = request.form.get("email_text")
 
     if text == "":
-        return render_template("index.html", error="Não há email para classificar!")
+        return render_template("index.html", error="Não há email para classificar!"), 404
 
     category = classify_email(text)
+
+    if category is None:
+       return render_template("index.html", error="Não foi possível classificar!"), 400
+
     response = generate_response(text, category)
 
     return render_template(
@@ -29,12 +33,14 @@ def file_email():
     file = request.files.get("email_file")
 
     if not file or not file.filename.endswith((".pdf",".txt")):
-        return "Por favor, envie apenas arquivos PDF ou TXT."
+        return render_template("index.html", error="Por favor, envie apenas arquivos PDF ou TXT."), 400
 
     if file.filename.endswith(".txt"):
         email_txt = file.read().decode("utf-8")
 
         category = classify_email(email_txt)
+        if category is None:
+            return render_template("index.html", error="Não foi possível classificar!"), 400
         response = generate_response(email_txt, category)
         return render_template(
             "index.html",
@@ -45,9 +51,11 @@ def file_email():
     email_text = extrair_pdf(file)
 
     if not email_text:
-        return "Não foi possível extrair texto do PDF."
+        return render_template("index.html", error="Não foi possível extrair texto do PDF."), 404
 
     category = classify_email(email_text)
+    if category is None:
+        return render_template("index.html", error="Não foi possível classificar!"), 400
     response = generate_response(email_text, category)
 
     return render_template(
