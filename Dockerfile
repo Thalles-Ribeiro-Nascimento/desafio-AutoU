@@ -21,5 +21,5 @@ COPY . .
 EXPOSE 5000
 
 # 8. Comando para rodar a aplicação quando o container iniciar
-CMD ["python3", "app.py"]
+CMD ["python3", "./project/app.py"]
 
