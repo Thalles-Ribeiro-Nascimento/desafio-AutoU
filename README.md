@@ -23,7 +23,7 @@ arquivo [Example.env](example.env)
 O projeto rodará no endereço http://localhost:5000.
 
 # Acesso ao Sistema via Web
-[https://app.thallesnascimento.com.br]()
+https://app.thallesnascimento.com.br
 
 # Ferramentas
 #### Back-end
