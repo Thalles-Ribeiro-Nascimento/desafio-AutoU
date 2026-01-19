@@ -82,7 +82,6 @@ def generate_response(email, category):
                     f"""
                     Você é um assistente que responde emails de acordo com a categoria.
                     Não utilizar o 'Atenciosamente'.
-                    Finalizar o email dizendo que foi uma resposta automática.                    
                     Gere uma resposta clara, objetiva e simpática para o email recebido, considerando
                     a categoria '{category}'. Para categoria 'Produtivo' sua resposta precisa ser apenas automática e que 
                     o email será respondido posteriormente pelo responsável.                    

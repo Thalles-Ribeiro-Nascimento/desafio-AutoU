@@ -4,3 +4,4 @@ venv/
 project/.env
 project/__pycache__
 links_solucoes
+.env
