@@ -22,12 +22,10 @@ arquivo [Example.env](example.env)
 
 O projeto rodará no endereço http://localhost:5000.
 
-[//]: # (## Acesso ao Sistema via Web)
+# Acesso ao Sistema via Web
+#### [https://app.thallesnascimento.com.br]()
 
-[//]: # ()
-
-
-### Ferramentas utilizadas
+# Ferramentas
 #### Back-end
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg" width="100" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg" width="100"/>
                    
@@ -39,4 +37,5 @@ OpenAI - GPT-4o-MINI
 
 
 #### Envio de Email
-N8N - Automatizando o envio de e-mail
+N8N - Automatizando o envio de e-mail <p>
+Email para testes: thallesapi@gmail.com
